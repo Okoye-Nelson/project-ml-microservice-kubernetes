@@ -6,9 +6,9 @@ jobs:
       # Use the same Docker base as the project
       - image: python:3.7.3-stretch
     
-    auth:
-      username: nelhombre
-      password: $DOCKERHUB_PASSWORD
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
 
     working_directory: ~/project-ml-microservice-kubernetes
 
