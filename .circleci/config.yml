@@ -7,7 +7,7 @@ jobs:
       - image: python:3.7.3-stretch
     
     auth:
-      username: $DOCKERHUB_USERNAME
+      username: nelhombre
       password: $DOCKERHUB_PASSWORD
 
     working_directory: ~/project-ml-microservice-kubernetes
