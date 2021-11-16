@@ -14,6 +14,7 @@ jobs:
 
     steps:
       - checkout
+      - setup_remote_docker
 
 # Download and cache dependencies
       - restore_cache:
@@ -42,6 +43,17 @@ jobs:
           command: |
             . venv/bin/activate
             make lint
+      
+      - deploy:
+          name: Push application Docker image
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              login="$DOCKERHUB_USERNAME"
+              ${login}
+              docker tag app "${ECR_ENDPOINT}/app:${CIRCLE_SHA1}"
+              docker push "${ECR_ENDPOINT}/app:${CIRCLE_SHA1}"
+            fi
+
 workflows:
   default:
     jobs:
