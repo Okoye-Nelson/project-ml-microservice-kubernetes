@@ -48,10 +48,10 @@ jobs:
           name: Push application Docker image
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              login=$DOCKERHUB_USERNAME
+              login=${DOCKERHUB_USERNAME}
               ${login}
-              docker tag app "${ECR_ENDPOINT}/app:${CIRCLE_SHA1}"
-              docker push "${ECR_ENDPOINT}/app:${CIRCLE_SHA1}"
+              docker tag app "app:${CIRCLE_SHA1}"
+              docker push "app:${CIRCLE_SHA1}"
             fi
 
 workflows:
