@@ -16,12 +16,6 @@ jobs:
       - checkout
       - setup_remote_docker
 
-      - run: |
-        TAG=0.1.$CIRCLE_BUILD_NUM
-        docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
-        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-        docker push CircleCI-Public/circleci-demo-docker:$TAG
-
 # Download and cache dependencies
       - restore_cache:
           keys:
@@ -50,6 +44,15 @@ jobs:
             . venv/bin/activate
             make lint
       
+      - deploy:
+          name: Push application Docker image
+          command: |
+              $dockerpath=nelhombre/flaskapp
+              docker login -u nelhombre
+              docker tag flaskapp $dockerpath:latest
+              docker push $dockerpath:latest
+            fi
+
 workflows:
   default:
     jobs:
