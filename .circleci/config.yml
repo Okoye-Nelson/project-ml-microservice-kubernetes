@@ -51,7 +51,7 @@ jobs:
               docker login -u nelhombre
               docker tag flaskapp $dockerpath:latest
               docker push $dockerpath:latest
-            fi
+            
 
 workflows:
   default:
