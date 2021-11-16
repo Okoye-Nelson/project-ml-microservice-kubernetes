@@ -47,10 +47,8 @@ jobs:
       - deploy:
           name: Push application Docker image
           command: |
-            username: $DOCKERHUB_USERNAME
-            password: $DOCKERHUB_PASSWORD
-            docker tag app "app:${CIRCLE_SHA1}"
-            docker push "app:${CIRCLE_SHA1}"
+              docker tag app "app:${CIRCLE_SHA1}"
+              docker push "app:${CIRCLE_SHA1}"
             fi
 
 workflows:
