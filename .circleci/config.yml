@@ -5,10 +5,6 @@ jobs:
     docker:
       # Use the same Docker base as the project
       - image: python:3.7.3-stretch
-    
-        auth:
-          username: $DOCKERHUB_USERNAME
-          password: $DOCKERHUB_PASSWORD
 
     working_directory: ~/project-ml-microservice-kubernetes
 
@@ -43,15 +39,6 @@ jobs:
           command: |
             . venv/bin/activate
             make lint
-      
-      - deploy:
-          name: Push application Docker image
-          command: |
-              $dockerpath=nelhombre/flaskapp
-              docker login -u nelhombre
-              docker tag flaskapp $dockerpath:latest
-              docker push $dockerpath:latest
-            fi
 
 workflows:
   default:
